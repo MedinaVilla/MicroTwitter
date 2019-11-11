@@ -8,10 +8,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8
+              <link rel="icon" href="assets/twitter.png" type="image/icon type">
+              <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
+
         <title>Registrate</title>
     </head>
     <body>
-        <h1>Registro</h1>
+        <section class="hero is-info">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        Registrate
+                    </h1>
+                    <h2 class="subtitle">
+                        Unete ahora para ser parte de una red social que te acompanara en tu dia a dia
+                    </h2>
+                </div>
+            </div>
+        </section>
     </body>
 </html>
