@@ -6,7 +6,6 @@
 
 <%@page import="Java.Navbar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%HttpSession sesion = request.getSession();%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +13,7 @@
         <link rel="icon" href="assets/twitter.png" type="image/icon type">
         <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bievenido</title>
+        <title>Bienvenido</title>
     </head>
     <body>
           <%
@@ -44,7 +43,7 @@
                             <br>
                             <p class="has-text-centered">
                                 <a href="registro"class="button is-medium is-info is-outlined">
-                                    Unete
+                                    Únete
                                 </a>
                             </p>
                         </div>

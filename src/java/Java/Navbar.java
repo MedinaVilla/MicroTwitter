@@ -15,7 +15,7 @@ public class Navbar {
         String usuario = "";
         usuario = " <nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n"
                 + "            <div class=\"navbar-brand\">\n"
-                + "                <a class=\"navbar-item\" href=\"https://bulma.io\">\n"
+                + "                <a class=\"navbar-item\" href=\"\">\n"
                 + "                    <img src=\"https://bulma.io/images/bulma-logo.png\" width=\"112\" height=\"28\">\n"
                 + "                </a>\n"
                 + "\n"
@@ -66,7 +66,7 @@ public class Navbar {
                 + "                                <strong>Registro</strong>\n"
                 + "                            </a>\n"
                 + "                            <a href=\"login\"class=\"button is-light\">\n"
-                + "                                Iniciar Sesion\n"
+                + "                                Iniciar Sesión\n"
                 + "                            </a>\n"
                 + "                        </div>\n"
                 + "                    </div>\n"

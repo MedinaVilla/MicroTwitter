@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : 7/11/2019, 07:33:07 PM
+    Document   : Perfil
+    Created on : 10/11/2019, 07:25:30 PM
     Author     : MedinaVilla
 --%>
 
@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" href="assets/twitter.png" type="image/icon type">
         <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
-        <title>Inicia sesion</title>
+        <title>Perfil</title>
     </head>
     <body>
         <%
@@ -27,10 +27,10 @@
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
-                        Login
+                        Perfil
                     </h1>
                     <h2 class="subtitle">
-                        Logueate con tu cuenta para seguir con la experiencia
+
                     </h2>
                 </div>
             </div>
