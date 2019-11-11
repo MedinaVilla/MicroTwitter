@@ -16,14 +16,14 @@
         <title>Bienvenido</title>
     </head>
     <body>
-          <%
-                Navbar navbar = new Navbar();
-                try {
-                    out.println(navbar.showNavbar());
-                } catch (Exception e) {
-                    out.println(navbar.showNavbar());
-                }
-            %>
+        <%
+            Navbar navbar = new Navbar();
+            try {
+                out.println(navbar.showNavbar());
+            } catch (Exception e) {
+                out.println(navbar.showNavbar());
+            }
+        %>
         <section class="hero is-fullheight is-default is-bold">
             <div class="hero-body">
                 <div class="container has-text-centered">
