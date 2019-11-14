@@ -18,9 +18,9 @@
         <%
             Navbar navbar = new Navbar();
             try {
-                out.println(navbar.showNavbar());
+                out.println(navbar.showNavbar(session.getAttribute("nombreU").toString()));
             } catch (Exception e) {
-                out.println(navbar.showNavbar());
+                out.println(navbar.showNavbar(""));
             }
         %>
         <section class="hero is-info">

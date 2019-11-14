@@ -18,10 +18,12 @@
         <%
             Navbar navbar = new Navbar();
             try {
-                out.println(navbar.showNavbar());
+                out.println(navbar.showNavbar(session.getAttribute("nombreU").toString()));
             } catch (Exception e) {
-                out.println(navbar.showNavbar());
+                out.println(navbar.showNavbar(""));
             }
+            System.out.println("yip");
+            System.out.println();
         %>
         <section class="hero is-info">
             <div class="hero-body">

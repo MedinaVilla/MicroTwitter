@@ -19,9 +19,9 @@
         <%
             Navbar navbar = new Navbar();
             try {
-                out.println(navbar.showNavbar());
+                out.println(navbar.showNavbar(session.getAttribute("nomU").toString()));
             } catch (Exception e) {
-                out.println(navbar.showNavbar());
+                out.println(navbar.showNavbar(""));
             }
         %>
         <section class="hero is-fullheight is-default is-bold">
@@ -42,7 +42,7 @@
                             </h2>
                             <br>
                             <p class="has-text-centered">
-                                <a href="registro"class="button is-medium is-info is-outlined">
+                                <a name="bLogin" id="bLogin" href="registro"class="button is-medium is-info is-outlined">
                                     Únete
                                 </a>
                             </p>
