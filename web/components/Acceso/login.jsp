@@ -23,6 +23,8 @@
             Navbar navbar = new Navbar();
             try {
                 out.println(navbar.showNavbar(session.getAttribute("nomU").toString()));
+                response.sendRedirect("./panel");
+
             } catch (Exception e) {
                 out.println(navbar.showNavbar(""));
             }
@@ -35,7 +37,7 @@
                         Login
                     </h1>
                     <h2 class="subtitle">
-                        Logueate con tu cuenta para seguir con la experiencia
+                        Inicia sesion con tu cuenta para seguir con la experiencia
                     </h2>
                 </div>
             </div>

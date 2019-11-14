@@ -18,7 +18,7 @@ public class Navbar {
 
             usuario = " <nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n"
                     + "            <div class=\"navbar-brand\">\n"
-                    + "                <a class=\"navbar-item\" href=\"\">\n"
+                    + "                <a class=\"navbar-item\" href=\"/MicroTwitter/\">\n"
                     + "                    <img src=\"https://bulma.io/images/bulma-logo.png\" width=\"112\" height=\"28\">\n"
                     + "                </a>\n"
                     + "\n"
@@ -80,7 +80,7 @@ public class Navbar {
         } else {
             usuario = " <nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n"
                     + "            <div class=\"navbar-brand\">\n"
-                    + "                <a class=\"navbar-item\" href=\"\">\n"
+                    + "                <a class=\"navbar-item\" href=\"panel\">\n"
                     + "                    <img src=\"https://bulma.io/images/bulma-logo.png\" width=\"112\" height=\"28\">\n"
                     + "                </a>\n"
                     + "\n"

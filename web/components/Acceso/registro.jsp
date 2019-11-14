@@ -22,6 +22,8 @@
             Navbar navbar = new Navbar();
             try {
                 out.println(navbar.showNavbar(session.getAttribute("nomU").toString()));
+                response.sendRedirect("./panel");
+
             } catch (Exception e) {
                 out.println(navbar.showNavbar(""));
             }
@@ -45,7 +47,22 @@
                 </h1>
             </div>
         </section>
-        <form name="registro" id="registro" action="registrarse" method="post">
+        <form name="registro"id="registro" action="registrarse" enctype="multipart/form-data" method="POST">
+             <div class="container">
+                <div class="column">
+                    <div class="column is 4">
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input name="email" id="email" class="input is-primary" type="text" placeholder="Correo electornico">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="container">
                 <div class="column">
                     <div class="column is 4">
@@ -81,7 +98,7 @@
                     <div class="column is 4">
                         <div class="field">
                             <p class="control has-icons-left">
-                                <input name="rContra" class="input" type="password" placeholder="Repite tu Nueva Contraseña">
+                                <input name="rContra" id="rContra" class="input" type="password" placeholder="Repite tu Nueva Contraseña">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                 </span>
@@ -92,7 +109,7 @@
             </div>
             <div align="center">
                 Selecciona tu Nueva foto de Perfil<br />
-                <input name="fileInput"  id="fileInput" type="file" />
+                <input name="fileInput" id="fileInput" type="file" />
                 <br />
                 <img id="imgSalida" width="50%" height="50%" src="" />
             </div>
