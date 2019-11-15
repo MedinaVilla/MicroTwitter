@@ -17,3 +17,6 @@ $(function () {
                 });
     });
 });
+function showErrorLogin() {
+    document.getElementById("loginErr").innerHTML = "Usuario o password son incorrectos";
+}

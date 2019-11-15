@@ -20,7 +20,7 @@
             sesion.setAttribute("identificador", nombreUsu);
             rs = usuario.getUsuarioPorID(nombreUsu);
             while (rs.next()) {
-                sesion.setAttribute("nombreU", rs.getString("usuario.nomU"));
+                sesion.setAttribute("nomU", rs.getString("usuario.nomU"));
             }
             response.sendRedirect("./panel");
         } else {

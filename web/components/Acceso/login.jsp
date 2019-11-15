@@ -77,6 +77,8 @@
                             <span class="icon is-small is-left">
                                 <i class="fas fa-lock"></i>
                             </span>
+                                     <p id="loginErr" class="help is-danger"> </p>
+
                         </p>
                     </div>
                 </div>
@@ -93,4 +95,15 @@
         </div>
     </form>
 </body>
+<%
+        String err = request.getParameter("errLogin");
+        System.out.println(err);
+        if (err != null) { 
+        %>
+    <script>
+        showErrorLogin();
+    </script> 
+    <%
+    }
+    %>
 </html>

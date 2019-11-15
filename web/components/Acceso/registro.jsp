@@ -48,7 +48,7 @@
             </div>
         </section>
         <form name="registro"id="registro" action="registrarse"  enctype="multipart/form-data" method="post">
-            <div class="container">
+            <div class="container ">
                 <div class="column">
                     <div class="column is 4">
                         <div class="field">

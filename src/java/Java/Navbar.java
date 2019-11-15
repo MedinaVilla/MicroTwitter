@@ -1,19 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Java;
-
-/**
- *
- * @author MedinaVilla
- */
 public class Navbar {
 
     public String showNavbar(String nombre) {
         String usuario = "";
-
         if (nombre.equals("")) {
 
             usuario = " <nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n"
@@ -31,33 +20,9 @@ public class Navbar {
                     + "\n"
                     + "            <div id=\"navbarBasicExample\" class=\"navbar-menu\">\n"
                     + "                <div class=\"navbar-start\">\n"
-                    + "                    <a class=\"navbar-item\">\n"
+                    + "                    <a href=\"/MicroTwitter\" class=\"navbar-item\">\n"
                     + "                        Inicio\n"
                     + "                    </a>\n"
-                    + "\n"
-                    + "                    <a class=\"navbar-item\">\n"
-                    + "                        Documentation\n"
-                    + "                    </a>\n"
-                    + "\n"
-                    + "                    <div class=\"navbar-item has-dropdown is-hoverable\">\n"
-                    + "                        <a class=\"navbar-link\">\n"
-                    + "                            More\n"
-                    + "                        </a>\n"
-                    + "\n"
-                    + "                        <div class=\"navbar-dropdown\">\n"
-                    + "                            <a class=\"navbar-item\">\n"
-                    + "                                About\n"
-                    + "                            </a>\n"
-                    + "                            <a class=\"navbar-item\">\n"
-                    + "                                Jobs\n"
-                    + "                            </a>\n"
-                    + "                            <a class=\"navbar-item\">\n"
-                    + "                                Contact\n"
-                    + "                            </a>\n"
-                    + "                            <hr class=\"navbar-divider\">\n"
-                    + "                            <a class=\"navbar-item\">\n"
-                    + "                                Report an issue\n"
-                    + "                            </a>\n"
                     + "                        </div>\n"
                     + "                    </div>\n"
                     + "                </div>\n"
