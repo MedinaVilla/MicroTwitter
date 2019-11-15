@@ -47,8 +47,8 @@
                 </h1>
             </div>
         </section>
-        <form name="registro"id="registro" action="registrarse" enctype="multipart/form-data" method="POST">
-             <div class="container">
+        <form name="registro"id="registro" action="registrarse"  enctype="multipart/form-data" method="post">
+            <div class="container">
                 <div class="column">
                     <div class="column is 4">
                         <div class="field">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="container">
                 <div class="column">
                     <div class="column is 4">
@@ -107,13 +107,19 @@
                     </div>
                 </div>
             </div>
-            <div align="center">
-                Selecciona tu Nueva foto de Perfil<br />
-                <input name="fileInput" id="fileInput" type="file" />
-                <br />
-                <img id="imgSalida" width="50%" height="50%" src="" />
+            <div class="is-size-4" align="center">
+                Foto de Perfil<br />
+                <input type="file" id="file" name="file" size="50" 
+                       onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])"
+                       />
+                <div class="column is-8">
+                    <figure class="image is-128x128">
+                        <img id="blah" src="./assets/empty.jpg">
+                    </figure>
+                    <br/>
+                </div>
+                <br/>
             </div>
-
             <div class="field">
                 <p class="control">
                 <div align="center">

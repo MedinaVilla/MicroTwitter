@@ -4,6 +4,10 @@
     Author     : MedinaVilla
 --%>
 
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.sql.Blob"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="Java.database"%>
 <%@page import="Java.Navbar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +24,7 @@
             try {
                 out.println(navbar.showNavbar(session.getAttribute("nombreU").toString()));
             } catch (Exception e) {
-                 response.sendRedirect("./login");
+                response.sendRedirect("./login");
                 out.println(navbar.showNavbar(""));
             }
         %>
@@ -29,6 +33,20 @@
                 <div class="container">
                     <h1 class="title">
                         Tuits
+                        <%
+                            ResultSet res = null;
+                            database db = new database();
+                            db.conectar();
+                            res = db.consulta("select * from usuario where nomU='Yip';");
+                            if (res.next()) {
+                                Blob blob = res.getBlob("imagen");
+                                byte byteArray[] = blob.getBytes(1, (int) blob.length());
+                                response.setContentType("image/gif");
+                                OutputStream os = response.getOutputStream();
+                                os.write(byteArray);
+
+                            }
+                        %>
                     </h1>
                     <h2 class="subtitle">
 

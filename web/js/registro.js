@@ -9,7 +9,7 @@ $(function () {
                                 nomU: {required: true},
                                 contra: {required: true},
                                 rContra: {required:true,equalTo:"#contra"},
-                                fileInput: {required: true}
+                                file: {required: true}
 
                             },
                     messages:
@@ -18,7 +18,7 @@ $(function () {
                                 nomU: {required: "Ingrese el nombre de usuario"},
                                 contra: {required: "Ingrese la contraseña"},
                                 rContra: {required: "Repita la contraseña", equalTo: "Asegurese que coincidan las contraseñas"},
-                                fileInput: {required:""}
+                                file: {required:""}
                             
             }
                 });
