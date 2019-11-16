@@ -20,13 +20,25 @@
         <servlet-name>panel</servlet-name>
         <jsp-file>/components/VisorTweets/visor.jsp</jsp-file>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>loguearse</servlet-name>
         <jsp-file>/components/Acceso/loguearse.jsp</jsp-file>
     </servlet>
-       <servlet>
+    <servlet>
         <servlet-name>uploadImage</servlet-name>
-            <servlet-class>Java.imageUpload</servlet-class>
+        <servlet-class>Java.imageUpload</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>usuarios</servlet-name>
+        <jsp-file>/components/VisorTweets/searchUsers.jsp</jsp-file>
+    </servlet>
+      <servlet>
+        <servlet-name>logout</servlet-name>
+        <jsp-file>/components/Acceso/cerrarSesion.jsp</jsp-file>
+    </servlet>
+     <servlet>
+        <servlet-name>follow</servlet-name>
+        <jsp-file>/components/VisorTweets/seguirUsuario.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -44,13 +56,25 @@
         <servlet-name>panel</servlet-name>
         <url-pattern>/panel</url-pattern>
     </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>loguearse</servlet-name>
         <url-pattern>/loguearse</url-pattern>
     </servlet-mapping>
-       <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>uploadImage</servlet-name>
         <url-pattern>/registrarse</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>usuarios</servlet-name>
+        <url-pattern>/busqueda</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>follow</servlet-name>
+        <url-pattern>/follow</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

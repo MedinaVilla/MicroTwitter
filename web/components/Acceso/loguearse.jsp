@@ -14,13 +14,14 @@
     try {
         db.conectar();
         usuario usuario = new usuario();
-      
+
         if (usuario.iniciarSesion(nombreUsu, contra)) {
             HttpSession sesion = request.getSession();
             sesion.setAttribute("identificador", nombreUsu);
             rs = usuario.getUsuarioPorID(nombreUsu);
             while (rs.next()) {
                 sesion.setAttribute("nomU", rs.getString("usuario.nomU"));
+                sesion.setAttribute("email", rs.getString("usuario.correoE"));
             }
             response.sendRedirect("./panel");
         } else {

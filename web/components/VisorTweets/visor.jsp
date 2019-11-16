@@ -30,7 +30,7 @@
     <%
         Navbar navbar = new Navbar();
         try {
-            out.println(navbar.showNavbar(session.getAttribute("nombreU").toString()));
+            out.println(navbar.showNavbar(session.getAttribute("nomU").toString()));
         } catch (Exception e) {
             response.sendRedirect("./login");
             out.println(navbar.showNavbar(""));
@@ -41,7 +41,7 @@
             <div class="container">
                 <h1 class="title">
                     Tuits
-                    
+
                 </h1>
                 <h2 class="subtitle">
 
@@ -49,21 +49,86 @@
             </div>
         </div>
     </section>
-    <%
-                        ResultSet res = null;
-                        database db = new database();
-                        db.conectar();
-                        System.out.println(session.getAttribute("nomU"));
-                        res = db.consulta("select * from usuario where nomU='"+session.getAttribute("nomU")+"';");
-                        if (res.next()) {
-                            Blob blob = res.getBlob("imagen");
-                            byte byteArray[] = blob.getBytes(1, (int) blob.length());
-                            String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
-                            out.println("<figure class='image is-128x128'>");
-                            out.println("<img src='data:image/jpg;base64," + base64Encoded + "' />");
-                            out.println("</figure>");
-//                                out.println();
-                        }
-                    %>
+    <div class="columns">
+        <div class=" column container is-three-quarters">
+            <div class="box">
+                <div class="columns">
+                    <div class="column is-one-fifths ">
+                        <%
+                            ResultSet res = null;
+                            database db = new database();
+                            db.conectar();
+                            System.out.println(session.getAttribute("nomU"));
+                            res = db.consulta("select * from usuario where nomU='" + session.getAttribute("nomU") + "';");
+                            if (res.next()) {
+                                Blob blob = res.getBlob("imagen");
+                                byte byteArray[] = blob.getBytes(1, (int) blob.length());
+                                String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                                out.println("<div class='columns'>");
+                                out.println("<figure class='column image is-128x128'>");
+                                out.println("<img class='is-rounded image is-64x64' src='data:image/jpg;base64," + base64Encoded + "' />");
+                                out.println("<p class='has-text-weight-semibold'>@" + res.getString("nomU") + "</p>");
+                                out.println("</figure>");
+                                out.println("</div>");
+                                //                                out.println();
+                            }
+                        %>    
+                    </div>
+                    <div class="field-body column is-four-fifths">
+                        <form action="submitTweet" method="POST">
+                            <div class="field">
+                                <div class="control">
+                                    <textarea class="textarea" rows="2" placeholder="¿Qué está pasando?"></textarea>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div>
+                                    <icon/>
+                                </div>
+                                <div>
+                                    <button class="button is-danger is-rounded is-small" type="submit">Publicar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-quarter"> 
+            <div class='box'>
+            <p class="title">Seguidores</p>
+            <hr/>
+            <%
+                res = null;
+                db = new database();
+                db.conectar();
+                res = db.consulta(
+                        "select correoE, nomU, contra, imagen, seguidores.fecha from usuario join seguidores on correoE = seguido"
+                        + " where seguidor = '" + session.getAttribute("email").toString() + "';");
+                while (res.next()) {
+                    Blob blob = res.getBlob("imagen");
+                    byte byteArray[] = blob.getBytes(1, (int) blob.length());
+                    String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                    out.println(" <article class='media'>");
+                    out.println("<figure class='media-left image is-64x64'>");
+                    out.println("<img class='is-rounded image is-64x64' src='data:image/jpg;base64," + base64Encoded + "' />");
+                    out.println("</figure>");
+                    out.println("<div class='media-content'>");
+                    out.println("<div class='content'>");
+                    out.println("<br/>");
+                    out.println("<p class='is-size-5'><strong>@" + res.getString("nomU") + "</strong></p>"
+                            + "<p><small>Seguido desde: "+res.getString("fecha")+"</small>"
+                            + "</p>");
+                    out.println("</div>");
+                    out.println("</article>");
+                    out.println("<hr/>");
+
+                }
+                db.cierraConexion();
+            %>
+        </div>
+            </div>
+
+    </div>
 </body>
 </html>

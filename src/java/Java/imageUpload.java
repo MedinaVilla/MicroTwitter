@@ -34,13 +34,11 @@ public class imageUpload extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        System.out.println(email);
         String usuario = request.getParameter("nomU");
         String contra = request.getParameter("contra");
 
         response.setContentType("text/html/charset=UTF-8");
         out = response.getWriter();
-        int result = 0;
         Part part = request.getPart("file");
         System.out.println(part);
         InputStream is = part.getInputStream();
@@ -56,7 +54,7 @@ public class imageUpload extends HttpServlet {
             ps.setDate(5, date);
             ps.executeUpdate();
             db.cierraConexion();
-            response.sendRedirect("MicroTwitter/login");
+            response.sendRedirect("login");
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
