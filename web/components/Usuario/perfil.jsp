@@ -24,9 +24,9 @@
             }
         %>
  
-     <section class="hero is-primary">
+     <section class="hero is-info">
       <div class="hero-body">
-        <div class="columns">
+        <div class="columns is-mobile">
           <div class="column">
             <div class="container" align="left">
               <figure class="image is-128x128">
@@ -36,8 +36,8 @@
             </div>
           </div>
           <div class="container" align="right">
-            <div class="column">
-              <section class="hero is-primary">
+            <div class="column is-6 is-offset-4">
+              <section class="hero is-info">
                 <div class="hero-body">
                   <h1 class="title">
                     @Nombre Usuario
@@ -66,14 +66,16 @@
         <div>
           <br>
           <p class="heading">Siguiendo</p>
-          <p class="title">123</p>
+          <!--Este es el boton para ver a los que sigues-->
+          <p class="title"><a class="link is-info">123</a></p>
         </div>
       </div>
       <div class="level-item has-text-centered">
         <div>
           <br>
           <p class="heading">Seguidores</p>
-          <p class="title">456K</p>
+          <!--Este es el boton para ver los seguidores-->
+          <p class="title"><a class="link is-info">222</a></p>
         </div>
       </div>
     </nav>
@@ -86,41 +88,56 @@
             <img src="https://bulma.io/images/placeholders/128x128.png">
           </p>
         </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
-                <br>
-                Here Goes the Tweet
-              </p>
-            </div>
-          </div>
-
-          <div class="media-right">
-            <button class="delete"></button>
-          </div>
-      </article>
-    </div>
-      <br><br>
-
-    <div class ="container">
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png">
-          </p>
-        </figure>
         <div class="media-content">
           <div class="content">
             <p>
               <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
               <br>
-              Another Tweet
+              Here Goes the Tweet
             </p>
           </div>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <!--Boton de Retweet-->
+            <a class="level-item">
+              <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+            </a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="media-right">
+        <button class="delete"></button>
+      </div>
+    </article>
+  </div>
+      <br><br>
+
+      <div class ="container">
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img src="https://bulma.io/images/placeholders/128x128.png">
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
+                <br>
+                Another Tweet
+              </p>
+            </div>
           <nav class="level is-mobile">
+            <div class="level-left">
+              <!--Boton de Retweet-->
+              <a class="level-item">
+                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+              </a>
+            </div>
           </nav>
         </div>
+
         <div class="media-right">
           <button class="delete"></button>
         </div>
