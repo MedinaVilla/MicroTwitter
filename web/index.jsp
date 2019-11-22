@@ -20,6 +20,8 @@
             Navbar navbar = new Navbar();
             try {
                 out.println(navbar.showNavbar(session.getAttribute("nomU").toString()));
+                              response.sendRedirect("./panel");
+
             } catch (Exception e) {
                 out.println(navbar.showNavbar(""));
             }

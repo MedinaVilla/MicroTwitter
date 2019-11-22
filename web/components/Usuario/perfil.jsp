@@ -90,7 +90,7 @@
                     <br>
                     <p class="heading">Siguiendo</p>
                     <!--Este es el boton para ver a los que sigues-->
-                    <p class="title"><a href="perfil/siguiendo" class="link is-info">
+                    <p class="title"><a href="perfil/seguidos" class="link is-info">
                             <%
                                 res = null;
                                 db = new database();

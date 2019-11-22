@@ -40,8 +40,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    Tuits
-
+                    Inicio
                 </h1>
                 <h2 class="subtitle">
 
@@ -125,41 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="column is-one-quarter"> 
-            <div class='box'>
-                <p class="title">Seguidores</p>
-                <hr/>
-                <%
-                    res = null;
-                    db = new database();
-                    db.conectar();
-                    res = db.consulta(
-                            "select correoE, nomU, contra, imagen, seguidores.fecha from usuario join seguidores on correoE = seguido"
-                            + " where seguidor = '" + session.getAttribute("email").toString() + "';");
-                    while (res.next()) {
-                        Blob blob = res.getBlob("imagen");
-                        byte byteArray[] = blob.getBytes(1, (int) blob.length());
-                        String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
-                        out.println(" <article class='media'>");
-                        out.println("<figure class='media-left image is-64x64'>");
-                        out.println("<img class='is-rounded image is-64x64' src='data:image/jpg;base64," + base64Encoded + "' />");
-                        out.println("</figure>");
-                        out.println("<div class='media-content'>");
-                        out.println("<div class='content'>");
-                        out.println("<br/>");
-                        out.println("<p class='is-size-5'><strong>@" + res.getString("nomU") + "</strong></p>"
-                                + "<p><small>Seguido desde: " + res.getString("fecha") + "</small>"
-                                + "</p>");
-                        out.println("</div>");
-                        out.println("</article>");
-                        out.println("<hr/>");
-
-                    }
-                    db.cierraConexion();
-                %>
-            </div>
-        </div>
-
+ 
     </div>
 </body>
 </html>
