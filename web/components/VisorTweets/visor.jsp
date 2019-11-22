@@ -57,7 +57,6 @@
                             ResultSet res = null;
                             database db = new database();
                             db.conectar();
-                            System.out.println(session.getAttribute("nomU"));
                             res = db.consulta("select * from usuario where nomU='" + session.getAttribute("nomU") + "';");
                             if (res.next()) {
                                 Blob blob = res.getBlob("imagen");
@@ -69,7 +68,6 @@
                                 out.println("<p class='has-text-weight-semibold'>@" + res.getString("nomU") + "</p>");
                                 out.println("</figure>");
                                 out.println("</div>");
-                                //                                out.println();
                             }
                         %>    
                     </div>
@@ -93,10 +91,10 @@
                                     </a>
                                     <button class="button is-danger is-rounded is-small" type="submit">Publicar</button>
 
-                                        <figure id="imagePreview" name='imagePreview' class="image is-128x128 " style="display: none;">
-                                            <img id="blah" name='blah' src="">
-                                        </figure>
-                                        <br/>
+                                    <figure id="imagePreview" name='imagePreview' class="image is-128x128 " style="display: none;">
+                                        <img id="blah" name='blah' src="">
+                                    </figure>
+                                    <br/>
                                 </div>
                             </div>
                         </form>
@@ -124,7 +122,7 @@
                 </div>
             </div>
         </div>
- 
+
     </div>
 </body>
 </html>

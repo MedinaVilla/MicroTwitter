@@ -22,7 +22,7 @@
         <%
             Navbar navbar = new Navbar();
             try {
-                out.println(navbar.showNavbar(session.getAttribute("nombreU").toString()));
+                out.println(navbar.showNavbar(session.getAttribute("nomU").toString()));
             } catch (Exception e) {
                 out.println(navbar.showNavbar(""));
             }
@@ -30,58 +30,64 @@
 
         <section class="hero is-info">
             <div class="hero-body">
-                <div class="columns is-mobile">
-                    <div class="column">
-                        <div class="container" align="left">
-                            <figure class="image is-128x128">
-                                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                            </figure>
-                            <BR CLEAR=LEFT>
+                <div class ="container">
+                    <article class="media">
+                        <div class="container">
+                            <br/>
+                            <div class="media-left" align="left">
+                                <figure class="image is-128x128">
+                                    <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                                </figure>
+                                <BR CLEAR=LEFT>
+                            </div>
                         </div>
-                    </div>
-                    <div class="container" align="right">
-                        <div class="column is-6 is-offset-4">
-                            <section class="hero is-info">
-                                <div class="hero-body">
-                                    <h1 class="title">
-                                        @Nombre Usuario
-                                    </h1>
-                                    <h2 class="subtitle">
-                                        correo@outlook.com
-                                    </h2>
-                                </div>
-                            </section>
+                        <div class="media-content">
+                            <div class="content">
+
+                            </div>
                         </div>
-                    </div>
+                        <div class="media-right">
+                            <div class="content">
+                                <section class="hero is-info">
+                                    <div class="hero-body">
+                                        <h1 class="title">
+                                            @Nombre Usuario
+                                        </h1>
+                                        <h2 class="subtitle">
+                                            correo@outlook.com
+                                        </h2>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
-
-
         <nav class="level">
             <div class="level-item has-text-centered">
                 <div>
                     <br>
                     <p class="heading">Mis Tweets</p>
                     <p class="title">
-                         <%     
-                             ResultSet res;
-                                res = null;
-                                database db = new database();
-                                db.conectar();
-                                res = db.consulta(
-                                        "select count(idTweet) as tweets "+
-                                        "from (select texto, fecha "+
-                                        "from (select correoE "+
-                                        "from usuario join seguidores on correoE = seguidor where seguidor = '" + session.getAttribute("email").toString() + "') as seguidos " +
-                                        "join tweet on tweet.usuario = seguidos.correoE) "+
-                                        "as tweetUsuario natural join imagen;");
-                                if (res.next()) {
-                                    out.println(res.getString("tweets"));
-                                }
-                            %>
-                        
-                        
+                        <%
+                            ResultSet res;
+                            res = null;
+                            database db = new database();
+                            db.conectar();
+                            res = db.consulta(
+                                    "select count(idTweet) as tweets "
+                                    + "from (select texto, fecha "
+                                    + "from (select correoE "
+                                    + "from usuario join seguidores on correoE = seguidor where seguidor = '" + session.getAttribute("email").toString() + "') as seguidos "
+                                    + "join tweet on tweet.usuario = seguidos.correoE) "
+                                    + "as tweetUsuario natural join imagen;");
+                            if (res.next()) {
+                                out.println(res.getString("tweets"));
+                            }
+                        %>
+
+
                     </p>
                 </div>
             </div>
@@ -114,8 +120,7 @@
                     <p class="heading">Seguidores</p>
                     <!--Este es el boton para ver los seguidores-->
                     <p class="title"><a href="perfil/seguidores" class="link is-info">
-                            <%                                
-                                res = null;
+                            <%                                res = null;
                                 db = new database();
                                 db.conectar();
                                 res = db.consulta(
