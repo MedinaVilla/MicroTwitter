@@ -32,13 +32,21 @@
         <servlet-name>usuarios</servlet-name>
         <jsp-file>/components/VisorTweets/searchUsers.jsp</jsp-file>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>logout</servlet-name>
         <jsp-file>/components/Acceso/cerrarSesion.jsp</jsp-file>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>follow</servlet-name>
         <jsp-file>/components/VisorTweets/seguirUsuario.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>submitTweet</servlet-name>
+        <jsp-file>/components/VisorTweets/uploadTweet.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>seguidores</servlet-name>
+        <jsp-file>/components/Usuario/seguidores.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
@@ -64,17 +72,25 @@
         <servlet-name>uploadImage</servlet-name>
         <url-pattern>/registrarse</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>usuarios</servlet-name>
         <url-pattern>/busqueda</url-pattern>
     </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>follow</servlet-name>
         <url-pattern>/follow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>submitTweet</servlet-name>
+        <url-pattern>/submitTweet</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>seguidores</servlet-name>
+        <url-pattern>/perfil/seguidores</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
