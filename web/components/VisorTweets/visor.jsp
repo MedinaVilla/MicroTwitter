@@ -4,6 +4,7 @@
     Author     : MedinaVilla
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.Base64"%>
 <%@page import="javax.swing.ImageIcon"%>
 <%@page import="java.awt.Image"%>
@@ -103,7 +104,34 @@
             </div>
             <div class="box">
                 <div class ="container">
-                    <article class="media">
+
+                    <%
+                        PreparedStatement ps = db.getC().prepareStatement("select texto, fecha, ruta from (select texto, fecha "
+                                + "from (select correoE from usuario join seguidores on correoE = seguidor "
+                                + "where seguidor = '" + session.getAttribute("email") + "') as seguidos "
+                                + "join tweet on tweet.usuario = seguidos.correoE)as tweetUsuario "
+                                + "natural join imagen order by fecha;");
+                        res = ps.executeQuery();
+                        while (res.next()) {
+                            out.println("<article class='media'>");
+                            out.println("<figure class='media-left'>");
+                            out.println("<p class='image is-64x64'>");
+                            out.println("<img src='https://bulma.io/images/placeholders/128x128.png'>");
+                            out.println("</p>");
+                            out.println("</figure>");
+                            out.println("<div class='media-content'>");
+                            out.println("<div class='content'>");
+                            out.println("<p>");
+                            out.println("<strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>");
+                            out.println("   <br>");
+                            out.println("Here Goes the Tweet");
+                            out.println("</p>");
+                            out.println("</div>");
+                            out.println("</div>");
+                            out.println("</article>");
+                        }
+                    %>
+<!--                    <article class="media">
                         <figure class="media-left">
                             <p class="image is-64x64">
                                 <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -118,11 +146,10 @@
                                 </p>
                             </div>
                         </div>
-                    </article>
+                    </article>-->
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 </html>
