@@ -86,8 +86,6 @@
                                 out.println(res.getString("tweets"));
                             }
                         %>
-
-
                     </p>
                 </div>
             </div>

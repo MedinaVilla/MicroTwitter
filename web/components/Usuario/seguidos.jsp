@@ -15,7 +15,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" href="assets/twitter.png" type="image/icon type">
     <link rel="stylesheet" href="../css/bulma.css" type="text/css"/>
-    <title>Hola!</title>
+    <title>Seguidos</title>
 </head>
 <body>
     <%
@@ -68,7 +68,7 @@
                 out.println("</div>");
                 out.println("<br>");
                 out.println("<div class='media-right'>");
-                out.println("<form action='follow?user=" + res.getString("nomU") + "' method='POST'>");
+                out.println("<form action='/MicroTwitter/unfollow?user=" + res.getString("nomU") + "' method='POST'>");
                 out.println("<button type='submit' class='button is-danger'>Dejar de seguir</button>");
                 out.println("</form>");
                 out.println("</div>");

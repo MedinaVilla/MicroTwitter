@@ -94,7 +94,6 @@
     </form>
 </body>
 <%    String err = request.getParameter("errLogin");
-    System.out.println(err);
     if (err != null) {
 %>
 <script>

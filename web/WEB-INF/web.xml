@@ -42,7 +42,7 @@
     </servlet>
     <servlet>
         <servlet-name>submitTweet</servlet-name>
-        <jsp-file>/components/VisorTweets/uploadTweet.jsp</jsp-file>
+        <servlet-class>Java.imageUploadTweet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>seguidores</servlet-name>

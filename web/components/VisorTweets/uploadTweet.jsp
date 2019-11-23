@@ -19,8 +19,9 @@
     </head>
     <body>
         <%
-
+System.out.println("ENTRAA");
             PrintWriter outM;
+            ResultSet res;
             database db = new database();
             String email = session.getAttribute("email").toString();
             String texto = request.getParameter("texto");
@@ -39,6 +40,11 @@
                 ps.setString(1, email);
                 ps.setString(2, texto);
                 ps.executeUpdate();
+                res = db.consulta("select LAST_INSERT_ID() as id;");
+                if (res.next()) {
+                    int idTweet = res.getInt("id");System.out.println("idTweet: " + idTweet);
+                }
+                
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     int last_inserted_id = rs.getInt(1);

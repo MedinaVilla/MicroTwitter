@@ -50,7 +50,8 @@
         </div>
     </section>
     <div class="columns">
-        <div class=" column container is-three-quarters">
+        <div class="column is-one-fifth"></div>
+        <div class=" column container is-three-fifths">
             <div class="box">
                 <div class="columns">
                     <div class="column is-one-fifths ">
@@ -73,38 +74,34 @@
                         %>    
                     </div>
                     <div class="field-body column is-four-fifths">
-                        <form action="submitTweet" method="POST">
+                        <form action="submitTweet" enctype="multipart/form-data" method="post">
                             <div class="field">
                                 <div class="control">
                                     <textarea name="texto" id="texto" class="textarea" rows="2" placeholder="¿Qué está pasando?"></textarea>
                                 </div>
                             </div>
-                            <div class="">
-                                <div>
-                                    <icon/>
-                                </div>
-                                <div>
-                                    <input onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0]);
-                                            document.getElementById('imagePreview').style.display = 'block';
-                                           " type="file" id="selectedFile" style="display: none;" />
-                                    <a onclick="document.getElementById('selectedFile').click();">
-                                        <img class="image is-24x24" src="assets/picture.png"></img>
-                                    </a>
-                                    <button class="button is-danger is-rounded is-small" type="submit">Publicar</button>
-
-                                    <figure id="imagePreview" name='imagePreview' class="image is-128x128 " style="display: none;">
-                                        <img id="blah" name='blah' src="">
-                                    </figure>
-                                    <br/>
-                                </div>
+                            <div class="field">
+                                <input  onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0]);
+                                        document.getElementById('imagePreview').style.display = 'block';
+                                       " type="file" id="selectedFile" name="selectedFile" style="display: none;" />
+                                <a onclick="document.getElementById('selectedFile').click();">
+                                    <img class="image is-24x24" src="assets/picture.png"></img>
+                                </a>
                             </div>
+                            <div class="field">
+                                <button class="button is-danger is-rounded is-small" type="submit">Publicar</button>
+                            </div>
+                            <figure id="imagePreview" name='imagePreview' class="image is-128x128 " style="display: none;">
+                                <img id="blah" name='blah' src="">
+                            </figure>
+                            <br/>
                         </form>
+
                     </div>
                 </div>
             </div>
-            <div class="box">
+            <div class="box field">
                 <div class ="container">
-
                     <%
                         PreparedStatement ps = db.getC().prepareStatement("select texto, fecha, ruta from (select texto, fecha "
                                 + "from (select correoE from usuario join seguidores on correoE = seguidor "
@@ -131,25 +128,25 @@
                             out.println("</article>");
                         }
                     %>
-<!--                    <article class="media">
-                        <figure class="media-left">
-                            <p class="image is-64x64">
-                                <img src="https://bulma.io/images/placeholders/128x128.png">
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
-                                    <br>
-                                    Here Goes the Tweet
-                                </p>
-                            </div>
-                        </div>
-                    </article>-->
+                    <!--                    <article class="media">
+                                            <figure class="media-left">
+                                                <p class="image is-64x64">
+                                                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                                                </p>
+                                            </figure>
+                                            <div class="media-content">
+                                                <div class="content">
+                                                    <p>
+                                                        <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
+                                                        <br>
+                                                        Here Goes the Tweet
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </article>-->
                 </div>
             </div>
         </div>
-    </div>
+        <div class="column is-one-fifth"></div>
 </body>
 </html>
