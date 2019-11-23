@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : Perfil
     Created on : 10/11/2019, 07:25:30 PM
     Author     : MedinaVilla
@@ -136,6 +136,53 @@
         </nav>
 
         <br>
+
+          <div class="box field">
+              <div class ="container">
+                  <%
+                      PreparedStatement ps = db.getC().prepareStatement(
+                              "select nomU, imagen, texto, fecha , ruta"
+                              + "from (select idTweet, usuario, nomU, imagen, fecha from"
+                              +"((select correoE, nomU, imagen from usuario where correoE =" +session.getAttribute("email")
+                              +"join tweet on correoE = usuario)"
+                              +"natural join imagen)"
+                              + "order by fecha desc;"
+                            );
+                      res = ps.executeQuery();
+                      while (res.next()) {
+                          Blob blob = res.getBlob("ruta");
+                          byte byteArray[] = blob.getBytes(1, (int) blob.length());
+                          String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                          out.println("<article class='media'>");
+                          out.println("<figure class='media-left'>");
+                          out.println("<p class='image is-64x64'>");
+                          out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
+                          out.println("</p>");
+                          out.println("</figure>");
+                          out.println("<div class='media-content'>");
+                          out.println("<div class='content'>");
+                          out.println("<p>");
+                          out.println("<strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>");
+                          out.println("<br>");
+                          out.println(res.getString("texto"));
+                          out.println("<br>");
+                          out.println("<small>Fecha de publicacion: " + res.getString("fecha") + "</small>");
+                          out.println("</p>");
+                          out.println("</div>");
+                          out.println("<nav class='level is-mobile'>");
+                          out.println("<div class='level-left'>");
+                          out.println("<a href='retweet' class='level-item'>");
+                          out.println("<span class='icon is-small'><i class='fas fa-retweet'></i></span>");
+                          out.println("</a>");
+                          out.println("</div>");
+                          out.println("</nav>");
+                          out.println("</div>");
+                          out.println("</article>");
+                      }
+                  %>
+              </div>
+          </div>
+        <!--
         <div class ="container">
             <article class="media">
                 <figure class="media-left">
@@ -153,7 +200,7 @@
                     </div>
                     <nav class="level is-mobile">
                         <div class="level-left">
-                            <!--Boton de Retweet-->
+
                             <a class="level-item">
                                 <span class="icon is-small"><i class="fas fa-retweet"></i></span>
                             </a>
@@ -166,8 +213,9 @@
                 </div>
             </article>
         </div>
+      -->
         <br><br>
-
+<!--
         <div class ="container">
             <article class="media">
                 <figure class="media-left">
@@ -185,7 +233,6 @@
                     </div>
                     <nav class="level is-mobile">
                         <div class="level-left">
-                            <!--Boton de Retweet-->
                             <a class="level-item">
                                 <span class="icon is-small"><i class="fas fa-retweet"></i></span>
                             </a>
@@ -198,6 +245,6 @@
                 </div>
             </article>
         </div>
-
+-->
     </body>
 </html>
