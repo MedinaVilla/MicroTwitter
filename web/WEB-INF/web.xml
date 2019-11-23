@@ -52,11 +52,14 @@
         <servlet-name>seguidos</servlet-name>
         <jsp-file>/components/Usuario/seguidos.jsp</jsp-file>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>unfollow</servlet-name>
         <jsp-file>/components/Usuario/dejarSeguirUsuario.jsp</jsp-file>
     </servlet>
-    
+    <servlet>
+        <servlet-name>retweet</servlet-name>
+        <jsp-file>/components/VisorTweets/retweet.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -97,7 +100,7 @@
         <servlet-name>submitTweet</servlet-name>
         <url-pattern>/submitTweet</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>seguidores</servlet-name>
         <url-pattern>/perfil/seguidores</url-pattern>
     </servlet-mapping>
@@ -105,9 +108,13 @@
         <servlet-name>seguidos</servlet-name>
         <url-pattern>/perfil/seguidos</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>unfollow</servlet-name>
         <url-pattern>/unfollow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>retweet</servlet-name>
+        <url-pattern>/retweet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

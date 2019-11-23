@@ -46,8 +46,8 @@
             db.conectar();
             res = db.consulta(
                     "select correoE, nomU, contra, imagen, seguidores.fecha as fecha "
-                    + "from usuario join seguidores on correoE = seguidor "
-                    + "where seguido = '" + session.getAttribute("email").toString() + "'  ;");
+                    + "from usuario join seguidores on correoE = seguido "
+                    + "where seguidor = '" + session.getAttribute("email").toString() + "'  ;");
 
             while (res.next()) {
                 Imagen i = new Imagen(res.getBlob("imagen"));

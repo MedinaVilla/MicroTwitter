@@ -28,8 +28,8 @@
                 if (res.next()) {
                     String emailSeguir = res.getString("correoE");
                     PreparedStatement ps = db.getC().prepareStatement("delete from seguidores where seguidor = ? and seguido = ?;");
-                    ps.setString(1, emailSeguir);
-                    ps.setString(2, emailSeguido);
+                    ps.setString(1, emailSeguido);
+                    ps.setString(2, emailSeguir);
                     ps.executeUpdate();
                     db.cierraConexion();
                     response.sendRedirect("/MicroTwitter/panel");

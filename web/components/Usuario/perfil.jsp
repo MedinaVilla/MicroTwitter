@@ -15,6 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" href="assets/twitter.png" type="image/icon type">
+        <link rel="stylesheet" href="./assets/font/css/all.css" type="text/css">
         <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
         <title>Perfil</title>
     </head>
@@ -100,8 +101,8 @@
                                 db = new database();
                                 db.conectar();
                                 res = db.consulta(
-                                        "select count(correoE) as seguidos from usuario join seguidores on correoE = seguidor "
-                                        + "where seguido = '" + session.getAttribute("email").toString() + "'  ;");
+                                        "select count(correoE) as seguidos from usuario join seguidores on correoE = seguido "
+                                        + "where seguidor = '" + session.getAttribute("email").toString() + "'  ;");
 
                                 if (res.next()) {
                                     out.println(res.getString("seguidos"));
@@ -122,8 +123,8 @@
                                 db = new database();
                                 db.conectar();
                                 res = db.consulta(
-                                        "select count(correoE) as seguidores from usuario join seguidores on correoE = seguido"
-                                        + " where seguidor = '" + session.getAttribute("email").toString() + "';");
+                                        "select count(correoE) as seguidores from usuario join seguidores on correoE = seguidor"
+                                        + " where seguido = '" + session.getAttribute("email").toString() + "';");
                                 if (res.next()) {
                                     out.println(res.getString("seguidores"));
                                 }

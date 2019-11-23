@@ -44,8 +44,8 @@
             ResultSet res;
             database db = new database();
             db.conectar();
-            PreparedStatement ps = db.getC().prepareStatement("select correoE, nomU, contra, imagen, seguidores.fecha as fecha from usuario join seguidores on correoE = seguido"
-                    + " where seguidor = ?;");
+            PreparedStatement ps = db.getC().prepareStatement("select correoE, nomU, contra, imagen, seguidores.fecha as fecha from usuario join seguidores on correoE = seguidor"
+                    + " where seguido = ?;");
             ps.setString(1, session.getAttribute("email").toString());
             res = ps.executeQuery();
             while (res.next()) {

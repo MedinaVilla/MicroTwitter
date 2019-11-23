@@ -24,6 +24,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" href="assets/twitter.png" type="image/icon type">
+    <link rel="stylesheet" href="./assets/font/css/all.css" type="text/css">
     <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
     <title>Hola!</title>
 </head>
@@ -64,7 +65,7 @@
                                 Blob blob = res.getBlob("imagen");
                                 byte byteArray[] = blob.getBytes(1, (int) blob.length());
                                 String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
-                                out.println("<div class='columns'>");
+                                out.println("<div >");
                                 out.println("<figure class='column image is-128x128'>");
                                 out.println("<img class='is-rounded image is-64x64' src='data:image/jpg;base64," + base64Encoded + "' />");
                                 out.println("<p class='has-text-weight-semibold'>@" + res.getString("nomU") + "</p>");
@@ -73,17 +74,19 @@
                             }
                         %>    
                     </div>
+                    
                     <div class="field-body column is-four-fifths">
                         <form action="submitTweet" enctype="multipart/form-data" method="post">
                             <div class="field">
-                                <div class="control">
+                                <div class="control column">
                                     <textarea name="texto" id="texto" class="textarea" rows="2" placeholder="¿Qué está pasando?"></textarea>
                                 </div>
                             </div>
                             <div class="field">
                                 <input  onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0]);
                                         document.getElementById('imagePreview').style.display = 'block';
-                                       " type="file" id="selectedFile" name="selectedFile" style="display: none;" />
+                                        document.getElementById('selectedFile').name = 'selectedFileCheck';
+                                        " type="file" id="selectedFile" name="selectedFile" style="display: none;" />
                                 <a onclick="document.getElementById('selectedFile').click();">
                                     <img class="image is-24x24" src="assets/picture.png"></img>
                                 </a>
@@ -104,26 +107,38 @@
                 <div class ="container">
                     <%
                         PreparedStatement ps = db.getC().prepareStatement("select texto, fecha, ruta from (select texto, fecha "
-                                + "from (select correoE from usuario join seguidores on correoE = seguidor "
+                                + "from (select seguido from usuario join seguidores on correoE = seguidor "
                                 + "where seguidor = '" + session.getAttribute("email") + "') as seguidos "
-                                + "join tweet on tweet.usuario = seguidos.correoE)as tweetUsuario "
+                                + "join tweet on tweet.usuario = seguidos.seguido)as tweetUsuario "
                                 + "natural join imagen order by fecha;");
                         res = ps.executeQuery();
                         while (res.next()) {
+                            Blob blob = res.getBlob("ruta");
+                            byte byteArray[] = blob.getBytes(1, (int) blob.length());
+                            String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
                             out.println("<article class='media'>");
                             out.println("<figure class='media-left'>");
                             out.println("<p class='image is-64x64'>");
-                            out.println("<img src='https://bulma.io/images/placeholders/128x128.png'>");
+                            out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
                             out.println("</p>");
                             out.println("</figure>");
                             out.println("<div class='media-content'>");
                             out.println("<div class='content'>");
                             out.println("<p>");
                             out.println("<strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>");
-                            out.println("   <br>");
-                            out.println("Here Goes the Tweet");
+                            out.println("<br>");
+                            out.println(res.getString("texto"));
+                            out.println("<br>");
+                            out.println("<small>Fecha de publicacion: " + res.getString("fecha") + "</small>");
                             out.println("</p>");
                             out.println("</div>");
+                            out.println("<nav class='level is-mobile'>");
+                            out.println("<div class='level-left'>");
+                            out.println("<a href='retweet' class='level-item'>");
+                            out.println("<span class='icon is-small'><i class='fas fa-retweet'></i></span>");
+                            out.println("</a>");
+                            out.println("</div>");
+                            out.println("</nav>");
                             out.println("</div>");
                             out.println("</article>");
                         }
@@ -148,5 +163,6 @@
             </div>
         </div>
         <div class="column is-one-fifth"></div>
+    </div>
 </body>
 </html>

@@ -21,8 +21,6 @@
         String userSeguido = session.getAttribute("email").toString();
         ResultSet res = null;
         
-        System.out.println(userSeguir);
-        System.out.println(userSeguido);
         database db = new database();
         db.conectar();
          try {
@@ -30,9 +28,8 @@
           if (res.next()) {
             PreparedStatement ps = db.getC().prepareStatement("insert into seguidores "+
               "(seguidor,seguido)values(?,?);");
-            System.out.println("PAPS");
-            ps.setString(1, res.getString("correoE"));
-            ps.setString(2, userSeguido);
+            ps.setString(1, userSeguido);
+            ps.setString(2, res.getString("correoE"));
             ps.executeUpdate();
             
             db.cierraConexion();
