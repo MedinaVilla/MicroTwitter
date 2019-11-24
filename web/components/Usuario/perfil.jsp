@@ -141,12 +141,13 @@
               <div class ="container">
                   <%
                       PreparedStatement ps = db.getC().prepareStatement(
-                              "select nomU, imagen, texto, fecha , ruta"
-                              + "from (select idTweet, usuario, nomU, imagen, fecha from"
-                              +"((select correoE, nomU, imagen from usuario where correoE =" +session.getAttribute("email")
-                              +"join tweet on correoE = usuario)"
-                              +"natural join imagen)"
-                              + "order by fecha desc;"
+                              "select nomU, imagen, texto, fecha ruta from"+
+                              "(select idTweet, texto, usuario, nomU, imagen, fecha from"+
+                              "((select correoE, nomU, imagen from"+
+                              "usuario where correoE="+session.getAttribute("email")+")"+
+                              "as usuarioActual.correoE = tweet.usuario))"+
+                              "as tweetsUsuarioActual natural join imagen)"+
+                              "order by fecha desc;"
                             );
                       res = ps.executeQuery();
                       while (res.next()) {
