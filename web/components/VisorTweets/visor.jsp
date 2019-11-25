@@ -74,7 +74,7 @@
                             }
                         %>    
                     </div>
-                    
+
                     <div class="field-body column is-four-fifths">
                         <form action="submitTweet" enctype="multipart/form-data" method="post">
                             <div class="field">
@@ -106,14 +106,18 @@
             <div class="box field">
                 <div class ="container">
                     <%
-                        PreparedStatement ps = db.getC().prepareStatement("select texto, fecha, ruta from (select texto, fecha "
-                                + "from (select seguido from usuario join seguidores on correoE = seguidor "
-                                + "where seguidor = '" + session.getAttribute("email") + "') as seguidos "
-                                + "join tweet on tweet.usuario = seguidos.seguido)as tweetUsuario "
-                                + "natural join imagen order by fecha;");
+                        PreparedStatement ps = db.getC().prepareStatement("select nomU, imagen, texto, fecha, ruta from "
+                                + "(select idTweet, usuario, nomU, imagen, texto, fecha from ("
+                                + "(select correoE, nomU, imagen from "
+                                + "((select seguido from seguidores where seguidor = '" + session.getAttribute("email") + "') as correoSeguidos "
+                                + "join usuario on correoSeguidos.seguido = usuario.correoE)) as seguidos "
+                                + "join tweet on seguidos.correoE = tweet.usuario"
+                                + ")) as tweetsSeguidos left join imagen on tweetsSeguidos.idTweet = imagen.idTweet and "
+                                + "tweetsSeguidos.usuario = imagen.usuario order by fecha desc;"
+                        );
                         res = ps.executeQuery();
                         while (res.next()) {
-                            Blob blob = res.getBlob("ruta");
+                            Blob blob = res.getBlob("imagen");
                             byte byteArray[] = blob.getBytes(1, (int) blob.length());
                             String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
                             out.println("<article class='media'>");
@@ -122,13 +126,24 @@
                             out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
                             out.println("</p>");
                             out.println("</figure>");
+                            blob = res.getBlob("ruta");
+
                             out.println("<div class='media-content'>");
                             out.println("<div class='content'>");
                             out.println("<p>");
-                            out.println("<strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>");
+                            out.println("<strong>" + res.getString("nomU") + "</strong> <small>@" + res.getString("nomU") + "</small>");
                             out.println("<br>");
                             out.println(res.getString("texto"));
                             out.println("<br>");
+                            if (blob!=null) {
+                                byteArray = blob.getBytes(1, (int) blob.length());
+                                base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                                out.println("<figure class='media-left'>");
+                                out.println("<p class='image is-128x128'>");
+                                out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
+                                out.println("</p>");
+                                out.println("</figure>");
+                            }
                             out.println("<small>Fecha de publicacion: " + res.getString("fecha") + "</small>");
                             out.println("</p>");
                             out.println("</div>");

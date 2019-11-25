@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="./assets/font/css/all.css" type="text/css">
         <link rel="icon" href="assets/twitter.png" type="image/icon type">
         <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
 

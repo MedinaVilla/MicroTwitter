@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="icon" href="assets/twitter.png" type="image/icon type">
+        <link rel="stylesheet" href="./assets/font/css/all.css" type="text/css">
         <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
         <script src="./js/jquery.min.js"></script>
         <script src="./js/jquery.validate.min.js"></script>
@@ -92,7 +93,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="container">
                 <div class="column">
                     <div class="column is 4">
@@ -109,9 +109,19 @@
             </div>
             <div class="is-size-4" align="center">
                 Foto de Perfil<br />
-                <input type="file" id="file" name="file" size="50" 
-                       onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])"
-                       />
+                    <label class="file-label column">
+                        <input  class="file-input" type="file" id="file" name="file" size="50" 
+                                onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])"
+                                />
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Choose a file…
+                            </span>
+                        </span>
+                    </label>
                 <div class="column is-8">
                     <figure class="image is-128x128">
                         <img id="blah" src="./assets/empty.jpg">
