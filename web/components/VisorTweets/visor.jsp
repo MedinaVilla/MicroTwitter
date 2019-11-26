@@ -23,13 +23,21 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="icon" href="assets/twitter.png" type="image/icon type">
-    <link rel="stylesheet" href="./assets/font/css/all.css" type="text/css">
+    <link rel="icon" href="/MicroTwitter/assets/twitter.png" type="image/icon type">
+    <link rel="stylesheet" href="/MicroTwitter/assets/font/css/all.css" type="text/css">
     <link rel="stylesheet" href="./css/bulma.css" type="text/css"/>
     <title>Hola!</title>
+
 </head>
 <body>
+    <script>
+        function retweetHandler(id) {
+            alert(id);
+            document.getElementById(id).submit();
+        }
+    </script>
     <%
+        int cont = 0;
         Navbar navbar = new Navbar();
         try {
             out.println(navbar.showNavbar(session.getAttribute("nomU").toString()));
@@ -106,13 +114,11 @@
             <div class="box field">
                 <div class ="container">
                     <%
-                        PreparedStatement ps = db.getC().prepareStatement("select nomU, imagen, texto, fecha, ruta from "
-                                + "(select idTweet, usuario, nomU, imagen, texto, fecha from ("
-                                + "(select correoE, nomU, imagen from "
-                                + "((select seguido from seguidores where seguidor = '" + session.getAttribute("email") + "') as correoSeguidos "
+                        PreparedStatement ps = db.getC().prepareStatement("select nomU, imagen, texto, fecha, ruta, nomUsuRet from "
+                                + "(select idTweet, usuario, nomU, imagen, texto, fecha, nomUsuRet from ((select correoE, nomU, imagen from "
+                                + "((select seguido from seguidores where seguidor ='"+session.getAttribute("email").toString()+"') as correoSeguidos "
                                 + "join usuario on correoSeguidos.seguido = usuario.correoE)) as seguidos "
-                                + "join tweet on seguidos.correoE = tweet.usuario"
-                                + ")) as tweetsSeguidos left join imagen on tweetsSeguidos.idTweet = imagen.idTweet and "
+                                + "join tweet on seguidos.correoE = tweet.usuario)) as tweetsSeguidos left join imagen on tweetsSeguidos.idTweet = imagen.idTweet and "
                                 + "tweetsSeguidos.usuario = imagen.usuario order by fecha desc;"
                         );
                         res = ps.executeQuery();
@@ -120,6 +126,9 @@
                             Blob blob = res.getBlob("imagen");
                             byte byteArray[] = blob.getBytes(1, (int) blob.length());
                             String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                            if(res.getString("nomUsuRet")!=null){
+                            out.println("<div class='has-text-grey'>"+res.getString("nomU") + " retwitteo de: " + res.getString("nomUsuRet")+"</div>");
+                            }
                             out.println("<article class='media'>");
                             out.println("<figure class='media-left'>");
                             out.println("<p class='image is-64x64'>");
@@ -135,7 +144,7 @@
                             out.println("<br>");
                             out.println(res.getString("texto"));
                             out.println("<br>");
-                            if (blob!=null) {
+                            if (blob != null) {
                                 byteArray = blob.getBytes(1, (int) blob.length());
                                 base64Encoded = Base64.getEncoder().encodeToString(byteArray);
                                 out.println("<figure class='media-left'>");
@@ -149,35 +158,26 @@
                             out.println("</div>");
                             out.println("<nav class='level is-mobile'>");
                             out.println("<div class='level-left'>");
-                            out.println("<a href='retweet' class='level-item'>");
+                            out.println("<form id='" + cont + "' method='POST' action='retweet?userTweet=" + res.getString("nomU") + "&textTweet=" + res.getString("texto") + "'>");
+                            out.println("<a onClick='retweetHandler(" + cont + ")' class='level-item'>");
                             out.println("<span class='icon is-small'><i class='fas fa-retweet'></i></span>");
                             out.println("</a>");
+                            out.println("</form>");
                             out.println("</div>");
                             out.println("</nav>");
                             out.println("</div>");
                             out.println("</article>");
+                            cont++;
+                        }
+                        if(cont==0){
+                                    out.println("<div class='container'>Aun no tiene tweets de sus seguidos :(</div>");
                         }
                     %>
-                    <!--                    <article class="media">
-                                            <figure class="media-left">
-                                                <p class="image is-64x64">
-                                                    <img src="https://bulma.io/images/placeholders/128x128.png">
-                                                </p>
-                                            </figure>
-                                            <div class="media-content">
-                                                <div class="content">
-                                                    <p>
-                                                        <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
-                                                        <br>
-                                                        Here Goes the Tweet
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </article>-->
                 </div>
             </div>
+
         </div>
-        <div class="column is-one-fifth"></div>
+        <div onclick="olaa('sdf')" class="column is-one-fifth"></div>
     </div>
 </body>
 </html>

@@ -4,6 +4,8 @@
     Author     : MedinaVilla
 --%>
 
+<%@page import="java.util.Base64"%>
+<%@page import="java.sql.Blob"%>
 <%@page import="java.sql.ResultSet"%>
 
 <%@page import="java.sql.PreparedStatement"%>
@@ -36,9 +38,23 @@
                         <div class="container">
                             <br/>
                             <div class="media-left" align="left">
-                                <figure class="image is-128x128">
-                                    <img class="is-rounded" src='data:image/jpg;base64, base64Encoded'>
-                                </figure>
+                                <%
+                                    ResultSet res;
+                                    res = null;
+                                    database db = new database();
+                                    db.conectar();
+                                    res = db.consulta("select imagen from usuario where nomU='" + session.getAttribute("nomU") + "'");
+                                    if (res.next()) {
+                                        Blob blob = res.getBlob("imagen");
+                                        byte byteArray[] = blob.getBytes(1, (int) blob.length());
+                                        String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                                        out.println("<figure class='media-left'>");
+                                        out.println("<p class='image is-128x128'>");
+                                        out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
+                                        out.println("</p>");
+                                        out.println("</figure>");
+                                    }
+                                %>
                                 <BR CLEAR=LEFT>
                             </div>
                         </div>
@@ -52,16 +68,15 @@
                                 <section class="hero is-info">
                                     <div class="hero-body">
                                         <h1 class="title">
-                                          <%
-                                          String user = request.getParameter("user");
-                                          out.println(user);
-                                          %>
+                                            <%
+                                                out.println(session.getAttribute("nomU").toString());
+                                            %>
                                         </h1>
                                         <h2 class="subtitle">
-                                          <%
-                                          String email = session.getAttribute("email").toString();
-                                          out.println(email);
-                                          %>
+                                            <%
+                                                String email = session.getAttribute("email").toString();
+                                                out.println(email);
+                                            %>
                                         </h2>
                                     </div>
                                 </section>
@@ -78,19 +93,13 @@
                     <p class="heading">Mis Tweets</p>
                     <p class="title">
                         <%
-                            ResultSet res;
                             res = null;
-                            database db = new database();
+                            db = new database();
                             db.conectar();
-                            res = db.consulta(
-                                    "select count(idTweet) as tweets "
-                                    + "from (select texto, fecha "
-                                    + "from (select correoE "
-                                    + "from usuario join seguidores on correoE = seguidor where seguidor = '" + session.getAttribute("email").toString() + "') as seguidos "
-                                    + "join tweet on tweet.usuario = seguidos.correoE) "
-                                    + "as tweetUsuario natural join imagen;");
+                            res = db.consulta("select count(idTweet) from tweet where usuario='" + session.getAttribute("email").toString() + "';");
+
                             if (res.next()) {
-                                out.println(res.getString("tweets"));
+                                out.println(res.getString("count(idTweet)"));
                             }
                         %>
                     </p>
@@ -143,115 +152,55 @@
 
         <br>
 
-          <div class="box field">
-              <div class ="container">
-                  <%
-                      PreparedStatement ps = db.getC().prepareStatement(
-                              "select nomU, imagen, texto, fecha ruta from"+
-                              "(select idTweet, texto, usuario, nomU, imagen, fecha from"+
-                              "((select correoE, nomU, imagen from"+
-                              "usuario where correoE="+session.getAttribute("email")+")"+
-                              "as usuarioActual.correoE = tweet.usuario))"+
-                              "as tweetsUsuarioActual natural join imagen)"+
-                              "order by fecha desc;"
-                            );
-                      res = ps.executeQuery();
-                      while (res.next()) {
-                          Blob blob = res.getBlob("ruta");
-                          byte byteArray[] = blob.getBytes(1, (int) blob.length());
-                          String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
-                          out.println("<article class='media'>");
-                          out.println("<figure class='media-left'>");
-                          out.println("<p class='image is-64x64'>");
-                          out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
-                          out.println("</p>");
-                          out.println("</figure>");
-                          out.println("<div class='media-content'>");
-                          out.println("<div class='content'>");
-                          out.println("<p>");
-                          out.println("<strong>nomU</strong> <small>fecha</small>");
-                          out.println("<br>");
-                          out.println(res.getString("texto"));
-                          out.println("<br>");
-                          out.println("<small>Fecha de publicacion: " + res.getString("fecha") + "</small>");
-                          out.println("</p>");
-                          out.println("</div>");
-                          out.println("<nav class='level is-mobile'>");
-                          out.println("<div class='level-left'>");
-                          out.println("<a href='retweet' class='level-item'>");
-                          out.println("<span class='icon is-small'><i class='fas fa-retweet'></i></span>");
-                          out.println("</a>");
-                          out.println("</div>");
-                          out.println("</nav>");
-                          out.println("</div>");
-                          out.println("</article>");
-                      }
-                  %>
-              </div>
-          </div>
-        <!--
-        <div class ="container">
-            <article class="media">
-                <figure class="media-left">
-                    <p class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
-                            <br>
-                            Here Goes the Tweet
-                        </p>
-                    </div>
-                    <nav class="level is-mobile">
-                        <div class="level-left">
-
-                            <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
-
-                <div class="media-right">
-                    <button class="delete"></button>
-                </div>
-            </article>
+        <div class="box field">
+            <div class ="container">
+                <%
+                        db = new database();
+                        db.conectar();
+                        res = db.consulta("select nomU, imagen, texto, fecha, nomUsuRet, ruta from ("
+                                + "(select idTweet, texto, usuario, nomU, imagen, fecha, nomUsuRet from "
+                                + "((select correoE, nomU, imagen from usuario where correoE ='" + session.getAttribute("email").toString() + "') as usuarioActual join tweet on usuarioActual.correoE = tweet.usuario)) "
+                                + "as tweetsUsuarioActual left join imagen on tweetsUsuarioActual.idTweet = imagen.idTweet and "
+                                + "tweetsUsuarioActual.usuario = imagen.usuario) order by fecha desc;");
+                        while (res.next()) {
+                            Blob blob = res.getBlob("imagen");
+                            byte byteArray[] = blob.getBytes(1, (int) blob.length());
+                            String base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                            out.println("<article class='media'>");
+                            out.println("<figure class='media-left'>");
+                            out.println("<p class='image is-64x64'>");
+                            out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
+                            out.println("</p>");
+                            out.println("</figure>");
+                            out.println("<div class='media-content'>");
+                            out.println("<div class='content'>");
+                            out.println("<p>");
+                            out.println("<strong>nomU</strong> <small>fecha</small>");
+                            out.println("<br>");
+                            out.println(res.getString("texto"));
+                            out.println("<br>");
+                            blob = res.getBlob("ruta");
+                            if (blob != null) {
+                                byteArray = blob.getBytes(1, (int) blob.length());
+                                base64Encoded = Base64.getEncoder().encodeToString(byteArray);
+                                out.println("<figure class='media-left'>");
+                                out.println("<p class='image is-64x64'>");
+                                out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
+                                out.println("</p>");
+                                out.println("</figure>");
+                            }
+                            out.println("<small>Fecha de publicacion: " + res.getString("fecha") + "</small>");
+                            out.println("</p>");
+                            out.println("</div>");
+                            out.println("<nav class='level is-mobile'>");
+                            out.println("<div class='level-left'>");
+                            out.println("</div>");
+                            out.println("</nav>");
+                            out.println("</div>");
+                            out.println("</article>");
+                        }
+                %>
+            </div>
         </div>
-      -->
-        <br><br>
-<!--
-        <div class ="container">
-            <article class="media">
-                <figure class="media-left">
-                    <p class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>
-                            <br>
-                            Another Tweet
-                        </p>
-                    </div>
-                    <nav class="level is-mobile">
-                        <div class="level-left">
-                            <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
-
-                <div class="media-right">
-                    <button class="delete"></button>
-                </div>
-            </article>
-        </div>
--->
     </body>
 </html>

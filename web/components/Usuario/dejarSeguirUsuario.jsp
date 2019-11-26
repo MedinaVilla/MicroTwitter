@@ -32,7 +32,7 @@
                     ps.setString(2, emailSeguir);
                     ps.executeUpdate();
                     db.cierraConexion();
-                    response.sendRedirect("/MicroTwitter/panel");
+                    response.sendRedirect("/MicroTwitter/perfil");
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.toString());

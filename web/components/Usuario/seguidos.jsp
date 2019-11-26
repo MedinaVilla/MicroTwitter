@@ -13,7 +13,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="icon" href="assets/twitter.png" type="image/icon type">
+   <link rel="icon" href="/MicroTwitter/assets/twitter.png" type="image/icon type">
     <link rel="stylesheet" href="../css/bulma.css" type="text/css"/>
     <title>Seguidos</title>
 </head>
@@ -41,6 +41,7 @@
     </section>
     <div class="box">
         <%
+            int cont = 0;
             ResultSet res = null;
             database db = new database();
             db.conectar();
@@ -74,6 +75,10 @@
                 out.println("</div>");
                 out.println("</div>");
                 out.println("</article>");
+                cont ++;
+            }
+            if(cont==0){
+            out.println("<div class='container'>No tiene seguidos</div>");
             }
         %>
     </div>

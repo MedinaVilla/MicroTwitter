@@ -42,6 +42,7 @@
         </section>
 
         <%
+            int cont = 0;
             database db = new database();
             String search = request.getParameter("search");
             db.conectar();
@@ -76,6 +77,9 @@
                     out.println("</div>");
                     out.println("</article>");
                     out.println("</div>");
+                }
+                if (cont == 0) {
+                    out.println("<div class='box container'>No hay coincidencias</div>");
                 }
                 db.cierraConexion();
             } catch (SQLException ex) {
