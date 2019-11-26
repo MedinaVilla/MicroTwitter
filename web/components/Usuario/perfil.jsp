@@ -169,7 +169,7 @@
                           out.println("<div class='media-content'>");
                           out.println("<div class='content'>");
                           out.println("<p>");
-                          out.println("<strong>Usuario(Yo)</strong> <small>@Usuario</small> <small>fecha</small>");
+                          out.println("<strong>nomU</strong> <small>fecha</small>");
                           out.println("<br>");
                           out.println(res.getString("texto"));
                           out.println("<br>");
