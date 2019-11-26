@@ -32,7 +32,6 @@
 <body>
     <script>
         function retweetHandler(id) {
-            alert(id);
             document.getElementById(id).submit();
         }
     </script>

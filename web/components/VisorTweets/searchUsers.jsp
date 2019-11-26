@@ -77,13 +77,14 @@
                     out.println("</div>");
                     out.println("</article>");
                     out.println("</div>");
-                }
-                if (cont == 0) {
-                    out.println("<div class='box container'>No hay coincidencias</div>");
+                    cont++;
                 }
                 db.cierraConexion();
             } catch (SQLException ex) {
                 System.out.println(ex.toString());
+            }
+            if (cont == 0) {
+                out.println("<div class='box container'>No hay coincidencias</div>");
             }
 
         %>

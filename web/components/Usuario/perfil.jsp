@@ -153,6 +153,7 @@
         <br>
 
         <div class="box field">
+            <div class="container column is-family-monospace"><center><p class=" is-family-monospace has-text-weight-semibold">Mis tweets</p></center></div>
             <div class ="container">
                 <%
                         db = new database();
@@ -175,7 +176,7 @@
                             out.println("<div class='media-content'>");
                             out.println("<div class='content'>");
                             out.println("<p>");
-                            out.println("<strong>nomU</strong> <small>fecha</small>");
+                            out.println("<strong>"+res.getString("nomU")+"</strong> <small>"+res.getString("fecha")+"</small>");
                             out.println("<br>");
                             out.println(res.getString("texto"));
                             out.println("<br>");
@@ -184,7 +185,7 @@
                                 byteArray = blob.getBytes(1, (int) blob.length());
                                 base64Encoded = Base64.getEncoder().encodeToString(byteArray);
                                 out.println("<figure class='media-left'>");
-                                out.println("<p class='image is-64x64'>");
+                                out.println("<p class='image is-128x128'>");
                                 out.println("<img src='data:image/jpg;base64," + base64Encoded + "'/>");
                                 out.println("</p>");
                                 out.println("</figure>");
