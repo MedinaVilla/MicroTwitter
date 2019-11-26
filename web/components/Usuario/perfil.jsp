@@ -37,7 +37,7 @@
                             <br/>
                             <div class="media-left" align="left">
                                 <figure class="image is-128x128">
-                                    <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                                    <img class="is-rounded" src='data:image/jpg;base64, base64Encoded'>
                                 </figure>
                                 <BR CLEAR=LEFT>
                             </div>
@@ -52,10 +52,16 @@
                                 <section class="hero is-info">
                                     <div class="hero-body">
                                         <h1 class="title">
-                                            @Nombre Usuario
+                                          <%
+                                          String user = request.getParameter("user");
+                                          out.println(user);
+                                          %>
                                         </h1>
                                         <h2 class="subtitle">
-                                            correo@outlook.com
+                                          <%
+                                          String email = session.getAttribute("email").toString();
+                                          out.println(email);
+                                          %>
                                         </h2>
                                     </div>
                                 </section>
